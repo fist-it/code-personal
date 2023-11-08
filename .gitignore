@@ -1,0 +1,14 @@
+# ignore .vscode directory
+.vscode/
+cpp/.vscode/
+
+# ignore node_modules directory
+node_modules/
+
+# ignore other non-code related files
+*.log
+.DS_Store
+Thumbs.db
+*.json
+*.code-workspace
+*.exe

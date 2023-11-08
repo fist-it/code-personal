@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moje Hobby</title>
+    <link rel="stylesheet" type="text/css" href="./style/style.css" />
+    <link rel="icon" type="image/x-icon" href="./resource/svg/Ficon.svg" />
+    
+  </head>
+
+  <body>
+    <div class="popup">
+      Jeśli to widzisz, twój JavaScript jest wyłączony. Proszę włącz go by mieć
+      pewność, że strona działała poprawnie.
+      <input
+        type="button"
+        class="accept"
+        value="OK"
+        onclick="this.parentNode.style.display = 'none';"
+      />
+    </div>
+
+    <script>
+      window.onload = async function () {
+        var popup = document.querySelector(".popup");
+        popup.parentNode.removeChild(popup);
+      };
+    </script>
+    <div class="layout">
+      <header><a href="main.html">Strona główna</a></header>
+      <div class="sidebar">
+        <ul>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn"><b>Koty</b></button>
+              <div class="dropdown-content">
+                <a href="KOTY.html">Wstęp</a>
+                <a href="uni.html">Uni</a>
+                <a href="panko.html">Panko</a>
+                <a href="melon.html">Melon i Fin</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="translapl.html"><b>Transformata Laplace'a</b></a>
+          </li>
+        </ul>
+      </div>
+      <footer>
+        <p>
+          Strona stworzona przez:
+          <a href="mailto:s197797@student.pg.edu.pl">Franciszek Fabiński</a>
+        </p>
+        <img
+          src="./resource/svg/Ficon.svg"
+          alt="F-icon"
+          width="50"
+          height="50"
+        />
+        <form action="odbierz.php" method="get" id="bugForm">
+          Jeśli napotkałeś/aś jakieś problemy na stronie, proszę zgłoś je tutaj:
+          <input type="text" name="bug" id="bug" placeholder="Opis błędu" />
+          <input type="submit" value="Wyślij" />
+        </form>
+
+        <div id="confirmationMessage"></div>
+
+        
+
+        <div id="confirmationMessage"></div>
+
+
+
+      </footer>
+      <main>
+        <div class="content">
+          <p>Nazywam się Franek Fabiński.</p>
+        </div>
+      </main>
+      <div class="content">
+        <p>
+          Jestem na pierwszym roku kierunku Informatyka na Politechnice
+          Gdańskiej. strona ta jest moim projektem na przedmiot Hipertekst i
+          Hipermedia oraz Wytwarzanie aplikacji internetowych.
+        </p>
+      </div>
+    </div>
+  </body>
+  <script src="./resource/JavaScript/submittext.js"></script>
+</html>

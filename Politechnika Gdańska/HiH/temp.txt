@@ -1,0 +1,23 @@
+document.addEventListener("DOMContentLoaded", function () {
+    var bugForm = document.getElementById("bugForm");
+    var confirmationMessage = document.getElementById("confirmationMessage");
+    var submitted = sessionStorage.getItem("submit");
+    console.log(sessionStorage.getItem("submit"));
+
+    if (submitted) {
+        bugForm.style.display = "none";
+        confirmationMessage.style.display = "block";
+        console.log("if");
+        confirmationMessage.innerHTML = "Dziękuję za zgłoszenie błędu: " + submitted;
+    } else {
+        bugForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var bugDescription = bugForm.querySelector('input[name="bug"]').value;
+            console.log("else");
+            confirmationMessage.innerHTML = "Dziękuję za zgłoszenie błędu: " + bugDescription;
+            confirmationMessage.style.display = "block";
+            bugForm.style.display = "none";
+            sessionStorage.setItem("submit", bugDescription);
+        });
+    }
+});
