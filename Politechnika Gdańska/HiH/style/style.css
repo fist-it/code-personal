@@ -1,7 +1,7 @@
 :root {
   --content-col: #00a9a5;
-  --text-col: #D8D9DA;
-  --container-col: #61677A;
+  --text-col: #d8d9da;
+  --container-col: #61677a;
 }
 
 html {
@@ -9,6 +9,14 @@ html {
   scroll-behavior: smooth;
 }
 
+#draggable {
+  width: 150px;
+  height: 150px;
+  padding: 0.5em;
+  background-color: red;
+  position: absolute;
+  z-index: 2;
+}
 
 .dropbtn {
   background-color: var(--container-col);
@@ -69,13 +77,12 @@ body::before {
   background-size: cover;
   filter: blur(2px);
   z-index: -1;
-  background-color:black;
+  background-color: black;
 }
 
 a {
   color: var(--text-col);
   text-decoration: none;
-
 }
 
 .layout {
@@ -92,11 +99,10 @@ a {
   opacity: 0.9;
 }
 
-
 .popup {
   color: var(--text-col);
   background-color: #ff432b;
-  border-radius:10px;
+  border-radius: 10px;
   z-index: 2;
   display: flex;
   margin: auto;
@@ -127,7 +133,9 @@ a {
   .popup {
     display: none;
   }
-
+  #draggable {
+    display: none;
+  }
 }
 
 .sidebar {
@@ -163,8 +171,6 @@ footer {
   align-content: center;
 }
 
-
-
 main {
   grid-area: main;
   background-color: var(--container-col);
@@ -185,17 +191,16 @@ main {
   color: var(--text-col);
 }
 
-
-input[type=text] {
+input[type="text"] {
   background-color: var(--container-col);
   color: var(--text-col);
-  height: 2fr; 
-  width: 2fr; 
+  height: 2fr;
+  width: 2fr;
   border-radius: 5px;
-  padding: 10px; 
+  padding: 10px;
 }
 
-input[type=submit] {
+input[type="submit"] {
   border-radius: 5px;
   background: var(--content-col);
 }
@@ -205,9 +210,9 @@ input[type=submit] {
   opacity: 0.7;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   background-color: var(--container-col);
   color: var(--text-col);
   border-radius: 5px;
-  padding: 10px; 
+  padding: 10px;
 }

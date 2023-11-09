@@ -6,7 +6,13 @@
     <title>Moje Hobby</title>
     <link rel="stylesheet" type="text/css" href="./style/style.css" />
     <link rel="icon" type="image/x-icon" href="./resource/svg/Ficon.svg" />
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $(function () {
+        $("#draggable").draggable();
+      });
+    </script>
   </head>
 
   <body>
@@ -27,8 +33,17 @@
         popup.parentNode.removeChild(popup);
       };
     </script>
+    <div id="draggable" class="ui-widget-content">
+      <a><img height="25%" width="25%"></a>
+      <a><img height="25%" width="25%"></a>
+      <a><img height="25%" width="25%"></a>
+      <a><img height="25%" width="25%"></a>
+      
+      <p>Drag me around</p>
+    </div>
     <div class="layout">
       <header><a href="main.html">Strona główna</a></header>
+      
       <div class="sidebar">
         <ul>
           <li>
@@ -66,12 +81,7 @@
 
         <div id="confirmationMessage"></div>
 
-        
-
         <div id="confirmationMessage"></div>
-
-
-
       </footer>
       <main>
         <div class="content">
