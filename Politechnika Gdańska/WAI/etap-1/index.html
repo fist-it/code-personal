@@ -10,6 +10,32 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+      .popup {
+        display: none;
+      }
+      .accept {
+        display: none;
+      }
+      #draggable {
+        display: grid;
+      }
+    </style>
+    <noscript>
+      <style>
+        .popup {
+          display: flex;
+        }
+        .accept {
+          display: block;
+        }
+        #draggable {
+          display: none;
+        }
+      </style>
+    </noscript>
+    
+    
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
@@ -37,31 +63,48 @@
 
     <div id="draggable" class="ui-widget-content" title="Draggable">
       <div class="social1">
-        <a href="https://github.com/fist-it" target="_blank"
-          ><img height="100%" src="./resource/svg/github-mark.svg"
-        /></a>
+        <a href="https://github.com/fist-it" target="_blank">
+          <img
+            height="50"
+            width="50"
+            alt="github logo"
+            src="./resource/svg/github-mark.svg"
+          />
+        </a>
       </div>
       <div class="social2">
         <a
           href="https://www.linkedin.com/in/franciszek-fabiński-a2688b233/"
           target="_blank"
-          ><img height="100%" src="./resource/svg/LinkedIn_icon.svg"
+          ><img
+            height="50"
+            width="50"
+            alt="linkedin logo"
+            src="./resource/svg/LinkedIn_icon.svg"
         /></a>
       </div>
       <div class="social3">
         <a href="mailto:fist_it@protonmail.com"
-          ><img height="100%" src="./resource/svg/proton-mail-seeklogo.com.svg"
+          ><img
+            height="50"
+            width="50"
+            alt="protonmail logo"
+            src="./resource/svg/proton-mail-seeklogo.com.svg"
         /></a>
       </div>
       <div class="social4">
         <a href="https://gitlab.com/fist-it"
-          ><img height="100%" src="./resource/svg/gitlab_logo.svg"
+          ><img
+            height="50"
+            width="50"
+            alt="gitlab logo"
+            src="./resource/svg/gitlab_logo.svg"
         /></a>
       </div>
     </div>
 
     <div class="layout">
-      <header><a href="main.html">Strona główna</a></header>
+      <header><a href="index.html">Strona główna</a></header>
 
       <div class="sidebar">
         <ul>
@@ -81,7 +124,7 @@
           </li>
         </ul>
       </div>
-      <footer>
+      <footer id="confirmationContainer">
         <p>
           Strona stworzona przez:
           <a href="mailto:s197797@student.pg.edu.pl">Franciszek Fabiński</a>
@@ -92,9 +135,10 @@
           width="50"
           height="50"
         />
-        <form id="bugForm" method="get" action="odbierz.php" >
-          Jeśli napotkałeś/aś jakieś problemy na stronie, proszę zgłoś je tutaj: <br>
-          <br>
+        <form id="bugForm" method="get" action="odbierz.php">
+          Jeśli napotkałeś/aś jakieś problemy na stronie, proszę zgłoś je tutaj:
+          <br />
+          <br />
           <textarea id="txtbug" maxlength="200"></textarea>
           <input type="submit" value="Wyślij" />
         </form>
@@ -108,26 +152,15 @@
       </main>
       <div class="content">
         <p>
-          Jestem na pierwszym roku studiów na kierunku Informatyka na Politechnice
-          Gdańskiej. Strona ta jest moim projektem na przedmiot Hipertekst i
-          Hipermedia oraz Wytwarzanie Aplikacji Internetowych. Znajdziesz tutaj
-          informacje dotyczące moich zainteresowań.
+          Jestem na pierwszym roku studiów na kierunku Informatyka na
+          Politechnice Gdańskiej. Strona ta jest moim projektem na przedmiot
+          Hipertekst i Hipermedia oraz Wytwarzanie Aplikacji Internetowych.
+          Znajdziesz tutaj informacje dotyczące moich zainteresowań.
         </p>
       </div>
     </div>
     <script src="./resource/JavaScript/submittext.js"></script>
-    
-    <script>
-      $(function () {
-        $("#draggable").draggable();
-      });
-    </script>
-    
-    <script>
-      $(function () {
-        $(document).tooltip();
-      });
-    </script>
+
     <script src="./resource/JavaScript/mimo84-bootstrap-maxlength-335860e/src/bootstrap-maxlength.js"></script>
     <script>
       $("textarea").maxlength({
@@ -139,6 +172,14 @@
         preText: "used ",
         separator: " of ",
         postText: " chars.",
+      });
+
+      $(function () {
+        $(document).tooltip();
+      });
+
+      $(function () {
+        $("#draggable").draggable();
       });
     </script>
   </body>

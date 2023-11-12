@@ -13,8 +13,8 @@ html {
 
 textarea{
   background-color: var(--container-col);
-  height: 2fr;
-  width: 2fr;
+  height: 125px;
+  width: 200px;
   border-radius: 5px;
   padding: 10px;
 }
@@ -26,7 +26,6 @@ textarea{
   background-color: var(--float-col);
   position: absolute;
   z-index: 2;
-  display: grid;
   gap: 4px;
   grid-template-columns: 100px 100px;
   grid-template-rows: 100px 100px;
@@ -34,6 +33,7 @@ textarea{
     "social1 social2"
     "social3 social4";
   border-radius: 10px;
+  right: 0;
 }
 
 #draggable:hover {
@@ -74,7 +74,6 @@ textarea{
   padding: 20px;
   text-align: center;
   font-size: 1.5em;
-
   cursor: pointer;
 }
 
@@ -85,7 +84,6 @@ textarea{
   padding: 20px;
   text-align: center;
   font-size: 1.5em;
-
   cursor: pointer;
 }
 
@@ -172,14 +170,14 @@ a {
 }
 
 .popup {
-
+  display: none;
   background-color: #ff432b;
   border-radius: 10px;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   margin: auto;
-  width: 0.2fr;
-  height: 0.5fr;
+  width: 50%;
+  height: 70px;
   position: fixed;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -238,9 +236,12 @@ footer {
   padding: 10px;
   text-align: center;
   font-size: 1.5em;
-
   align-items: center;
   align-content: center;
+}
+
+#confirmationMessage {
+  overflow: auto;
 }
 
 main {
@@ -263,28 +264,10 @@ main {
 
 }
 
-input[type="text"] {
-  background-color: var(--container-col);
 
-  height: 2fr;
-  width: 2fr;
-  border-radius: 5px;
-  padding: 10px;
-}
 
 input[type="submit"] {
   border-radius: 5px;
   background: var(--content-col);
 }
 
-::placeholder {
-
-  opacity: 0.7;
-}
-
-input[type="text"]:focus {
-  background-color: var(--container-col);
-
-  border-radius: 5px;
-  padding: 10px;
-}
