@@ -12,3 +12,4 @@ Thumbs.db
 *.json
 *.code-workspace
 *.exe
+cpp/main.cpp
