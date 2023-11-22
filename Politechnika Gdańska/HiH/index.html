@@ -103,9 +103,9 @@
     </div>
 
     <div class="layout">
-      <header><a href="index.html">Strona główna</a></header>
+      <header id="top"><a href="index.html">Strona główna</a></header>
 
-      <div class="sidebar">
+      <nav>
         <ul>
           <li>
             <div class="dropdown">
@@ -121,8 +121,11 @@
           <li>
             <a href="translapl.html"><b>Transformata Laplace'a</b></a>
           </li>
+          <li>
+            <a href="#confirmationContainer">Zgłoś błąd</a>
+        </li>
         </ul>
-      </div>
+      </nav>
       <footer id="confirmationContainer">
         <p>
           Strona stworzona przez:
@@ -143,9 +146,14 @@
         </form>
 
         <div id="confirmationMessage"></div>
+        <a href="#top">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 12h-2v2H9v-2H7l5-5 5 5z"/>
+          </svg>
+        </a>
       </footer>
       <main>
-        <div class="content">
+        <div class="main">
           <p>Nazywam się Franciszek Fabiński.</p>
         </div>
       </main>

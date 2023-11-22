@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moje Hobby</title>
-    <link rel="stylesheet" type="text/css" href="./style/style.css" />
+    <link rel="stylesheet" type="text/css" href="./style/laplace.css" />
     <link rel="icon" type="image/x-icon" href="./resource/svg/Ficon.svg" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -17,9 +17,6 @@
       .accept {
         display: none;
       }
-      #draggable {
-        display: grid;
-      }
     </style>
     <noscript>
       <style>
@@ -28,9 +25,6 @@
         }
         .accept {
           display: block;
-        }
-        #draggable {
-          display: none;
         }
       </style>
     </noscript>
@@ -103,9 +97,12 @@
     </div>
 
     <div class="layout">
-      <header><a href="index.html">Strona główna</a></header>
+      <header id="top">
+        <a href="index.html">Strona główna</a>
+       
+      </header>
 
-      <div class="sidebar">
+      <nav>
         <ul>
           <li>
             <div class="dropdown">
@@ -121,19 +118,58 @@
           <li>
             <a href="translapl.html"><b>Transformata Laplace'a</b></a>
           </li>
+          <li>
+            <a href="#confirmationContainer">Zgłoś błąd</a>
+        </li>
         </ul>
+      </nav>
+
+      <div class="table">
+        <h3>Część praktyczna</h3>
+        <p>
+          Stosując ogólny wzór na transformację Laplace'a:<br />
+          <img src="./resource/svg/laplace.svg" alt="laplace" /><br />
+          jesteśmy w stanie wyznaczyć transformację Laplace'a dla dowolnej
+          funkcji, np:
+        </p>
+        <table>
+          <tr id="tableheader">
+            <th>Funkcja</th>
+            <th>Rezultat</th>
+          </tr>
+          <tr>
+            <td>
+              <img src="./resource/svg/laplace/lap11.svg" alt="lap11" />
+            </td>
+            <td>
+              <img src="./resource/svg/laplace/lap12.svg" alt="lap12" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="./resource/svg/laplace/lap21.svg" alt="lap21" />
+            </td>
+            <td>
+              <img src="./resource/svg/laplace/lap22.svg" alt="lap22" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="./resource/svg/laplace/lap31.svg" alt="lap31" />
+            </td>
+            <td>
+              <img src="./resource/svg/laplace/lap32.svg" alt="lap32" />
+            </td>
+          </tr>
+        </table>
       </div>
+
       <footer id="confirmationContainer">
         <p>
           Strona stworzona przez:
           <a href="mailto:s197797@student.pg.edu.pl">Franciszek Fabiński</a>
         </p>
-        <img
-          src="./resource/svg/Ficon.svg"
-          alt="F-icon"
-          width="50"
-          height="50"
-        />
+
         <form id="bugForm" method="get" action="odbierz.php">
           Jeśli napotkałeś/aś jakieś problemy na stronie, proszę zgłoś je tutaj:
           <br />
@@ -143,9 +179,21 @@
         </form>
 
         <div id="confirmationMessage"></div>
+        <a href="#top">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 12h-2v2H9v-2H7l5-5 5 5z"
+            />
+          </svg>
+        </a>
       </footer>
       <main>
-        <div class="content">
+        <div class="main">
           <p>Transformata Laplaca</p>
         </div>
       </main>
@@ -156,15 +204,24 @@
           stanie określić prędkość zmian funkcji w danym punkcie. Jednak jak z
           większością moich zainteresowań, wpadłem w "króliczą norę". Zacząłem
           wykraczać ponad program, uczyłem się rachunku różniczkowego, aż w
-          końcu trafiłem na transformację Laplace'a. Z początku nie rozumiałem 
-          co tak właściwie robię, lecz materiał użytkownika <a href="https://www.youtube.com/@3blue1brown"><strong>3Blue1Brown</strong></a>
-          oraz kilka innych filmów otworzyły mi oczy - zrozumiałem, że transformata Laplace'a 
-          to jedno z najbardziej przydatnych dla inżynierów narzędzi.
-          <p>
-            Zmienia ona funkcję zależną od czasu na funkcję zależną od częstotliwości. Za pomocą dziedziny będącej liczbami zespolonymi,
-            tak jak w przypadku młodszego brata - transformaty Fouriera, możemy wyznaczyć udział poszczególnych częstotliwości i ekspotentów
-            w danej funkcji. Transformata Laplace'a pomaga również w rozwiązywaniu wszelkiego rodzaju równań różniczkowych.
-          </p>
+          końcu trafiłem na transformację Laplace'a. Z początku nie rozumiałem
+          co tak właściwie robię, lecz materiał użytkownika
+          <a href="https://www.youtube.com/@3blue1brown"
+            ><strong>3Blue1Brown</strong></a
+          >
+          oraz kilka innych filmów otworzyły mi oczy - zrozumiałem, że
+          transformata Laplace'a to jedno z najbardziej przydatnych dla
+          inżynierów narzędzi.
+        </p>
+        <p>
+          Zmienia ona funkcję zależną od czasu na funkcję zależną od
+          częstotliwości. Za pomocą dziedziny będącej liczbami zespolonymi, tak
+          jak w przypadku młodszego brata - transformaty Fouriera, możemy
+          wyznaczyć udział poszczególnych częstotliwości i ekspotentów w danej
+          funkcji. Transformata Laplace'a pomaga również w rozwiązywaniu
+          wszelkiego rodzaju równań różniczkowych. Poniżej przedstawione są
+          podstawowe wzory wyprowadzone z definicji, z czego ostatni jest
+          najbardziej przydatny w praktyce.
         </p>
       </div>
     </div>
