@@ -274,15 +274,7 @@ footer {
   overflow: auto;
 }
 
-main {
-  grid-area: main;
-  background-color: var(--container-col);
-  border-radius: 5px;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5em;
-}
-.main{
+main{
   grid-area: main;
   background-color: var(--container-col);
   border-radius: 5px;

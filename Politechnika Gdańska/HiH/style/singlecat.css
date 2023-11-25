@@ -5,6 +5,10 @@
   --float-col: #565656;
 }
 
+#toform {
+  align-items: left;
+}
+
 html {
   font: 1em/1.5 sans-serif;
   scroll-behavior: smooth;
@@ -20,6 +24,7 @@ textarea {
 }
 
 #draggable {
+  display: grid;
   width: 200px;
   height: 200px;
   padding: 0.4em;
@@ -144,6 +149,7 @@ body::before {
   background-color: black;
 }
 
+
 a {
   color: var(--text-col);
   text-decoration: none;
@@ -160,7 +166,16 @@ a {
     "sidebar main main"
     "sidebar content content"
     "footer footer footer";
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+.galeria {
+  grid-area: table;
+  background-color: var(--content-col);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5em;
 }
 
 .popup {
@@ -191,6 +206,7 @@ a {
       "sidebar"
       "main"
       "content"
+      "galeria"
       "footer";
   }
   .popup {
@@ -201,6 +217,7 @@ a {
   }
 }
 
+
 nav {
   grid-area: sidebar;
   background-color: var(--container-col);
@@ -208,7 +225,6 @@ nav {
   padding: 20px;
   text-align: left;
   font-size: 1.5em;
-
   text-decoration: none;
 }
 
@@ -244,7 +260,14 @@ main {
   text-align: center;
   font-size: 1.5em;
 }
-
+main{
+  grid-area: main;
+  background-color: var(--container-col);
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5em;
+}
 .content {
   grid-area: content;
   background-color: var(--content-col);
@@ -253,14 +276,7 @@ main {
   text-align: center;
   font-size: 1.5em;
 }
-.main{
-  grid-area: main;
-  background-color: var(--container-col);
-  border-radius: 5px;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5em;
-}
+
 input[type="submit"] {
   border-radius: 5px;
   background: var(--content-col);

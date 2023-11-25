@@ -31,15 +31,15 @@ textarea {
 }
 
 #draggable {
-  width: 200px;
-  height: 200px;
+  width: 10vw;
+  height: 10vw;
   padding: 0.4em;
   background-color: var(--float-col);
   position: absolute;
   z-index: 2;
   gap: 4px;
-  grid-template-columns: 100px 100px;
-  grid-template-rows: 100px 100px;
+  grid-template-columns: 5vw 5vw;
+  grid-template-rows: 5vw 5vw;
   grid-template-areas:
     "social1 social2"
     "social3 social4";
@@ -248,22 +248,14 @@ footer {
   overflow: auto;
 }
 
-main {
-  grid-area: main;
-  background-color: var(--container-col);
-  border-radius: 5px;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5em;
-}
 
-.main{
+main{
   grid-area: main;
   background-color: var(--container-col);
   border-radius: 5px;
   padding: 20px;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .content {
