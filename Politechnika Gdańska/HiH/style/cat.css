@@ -101,13 +101,11 @@ textarea {
   color: var(--text-col);
   font-size: 1em;
   border: none;
-  grid-area: sidebar;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
-  grid-area: sidebar;
 }
 
 .dropdown-content {
@@ -117,7 +115,6 @@ textarea {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 10px;
-  grid-area: sidebar;
 }
 
 .dropdown-content a {
@@ -125,7 +122,6 @@ textarea {
   text-decoration: none;
   display: block;
   border-radius: 10px;
-  grid-area: sidebar;
 }
 
 .dropdown-content a:hover {
@@ -167,7 +163,7 @@ a {
   display: grid;
   gap: 4px;
   grid-template-columns: 0.5fr 1fr 1fr;
-  grid-template-rows: 0.3fr 0.5fr 1.5fr 1fr;
+  grid-template-rows: 0.3fr 0.2fr 1.5fr 1fr;
   grid-template-areas:
     "header header header"
     "sidebar main main"
@@ -214,14 +210,13 @@ a {
   }
 }
 
-.sidebar {
+nav {
   grid-area: sidebar;
   background-color: var(--container-col);
   border-radius: 10px;
   padding: 20px;
   text-align: left;
   font-size: 1.5em;
-
   text-decoration: none;
 }
 
@@ -266,7 +261,14 @@ main {
   text-align: center;
   font-size: 1.5em;
 }
-
+.main{
+  grid-area: main;
+  background-color: var(--container-col);
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5em;
+}
 input[type="submit"] {
   border-radius: 5px;
   background: var(--content-col);

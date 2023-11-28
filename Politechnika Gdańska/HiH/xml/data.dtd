@@ -1,0 +1,35 @@
+<!ENTITY % countDefault "1">
+
+<!ELEMENT data (author, cats, Laplace)>
+
+<!ELEMENT author (name, surname)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+
+<!ELEMENT cats (cat+)>
+<!ELEMENT cat (name, type, about, links)>
+<!ATTLIST cat gender (male | female | both) #REQUIRED>
+<!ATTLIST cat count CDATA "%countDefault;">
+
+<!ELEMENT type (breed, furcolor)>
+<!ELEMENT breed (#PCDATA)>
+<!ELEMENT furcolor (#PCDATA)>
+<!ATTLIST furcolor pattern (tuxedo | calico | tabby | solid | bicolor | tricolor) #REQUIRED>
+
+<!ELEMENT about (#PCDATA)>
+
+<!ELEMENT links (image*, link*)>
+<!ELEMENT image (#PCDATA)>
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST image source CDATA #REQUIRED>
+<!ATTLIST link source CDATA #REQUIRED>
+
+<!ELEMENT Laplace (about, practice)>
+<!ATTLIST Laplace invented CDATA #REQUIRED>
+
+<!ELEMENT practice (definition, examples)>
+<!ELEMENT definition (image)>
+<!ELEMENT examples (example+)>
+
+<!ELEMENT example (image+)>
+<!ATTLIST example count CDATA "%countDefault;">

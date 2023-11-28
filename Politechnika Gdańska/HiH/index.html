@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moje Hobby</title>
+    <title>Moje Zainteresowania</title>
     <link rel="stylesheet" type="text/css" href="./style/style.css" />
     <link rel="icon" type="image/x-icon" href="./resource/svg/Ficon.svg" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -103,9 +103,9 @@
     </div>
 
     <div class="layout">
-      <header><a href="index.html">Strona główna</a></header>
+      <header id="top"><a href="index.html">Strona główna</a></header>
 
-      <div class="sidebar">
+      <nav>
         <ul>
           <li>
             <div class="dropdown">
@@ -115,14 +115,18 @@
                 <a href="./cats/uni.html">Uni</a>
                 <a href="./cats/panko.html">Panko</a>
                 <a href="./cats/melonandfin.html">Melon i Fin</a>
+                <a href="./galeria.html">Galeria kotów</a>
               </div>
             </div>
           </li>
           <li>
             <a href="translapl.html"><b>Transformata Laplace'a</b></a>
           </li>
+          <li>
+            <a href="#confirmationContainer">Zgłoś błąd</a>
+          </li>
         </ul>
-      </div>
+      </nav>
       <footer id="confirmationContainer">
         <p>
           Strona stworzona przez:
@@ -143,11 +147,21 @@
         </form>
 
         <div id="confirmationMessage"></div>
+        <a href="#top">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 12h-2v2H9v-2H7l5-5 5 5z"
+            />
+          </svg>
+        </a>
       </footer>
       <main>
-        <div class="content">
-          <p>Nazywam się Franciszek Fabiński.</p>
-        </div>
+        <h5>Nazywam się Franciszek Fabiński.</h5>
       </main>
       <div class="content">
         <p>
@@ -183,4 +197,3 @@
     </script>
   </body>
 </html>
-

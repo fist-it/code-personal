@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data SYSTEM "./data.dtd">
+<data>
+    <author>
+        <name>Franciszek</name>
+        <surname>Fabiński</surname>
+    </author>
+    <cats> 
+        <cat gender="male" count='1'>
+            <name>Uni</name>
+            <type>
+                <breed>Minuet/Napoleon</breed>
+                <furcolor pattern='tuxedo'>White and black</furcolor>
+            </type>
+            <about>
+                Kot Uni posiada dedykowane konto na TikToku, gdzie jego właściciel publikuje filmy z jego wizerunkiem. Jest kotem
+                w "smokingu", o czarno-białym namaszczeniu z charakterystycznym znakiem
+                przy jamie ustnej układającym się w "3". Z powodu tej cechy urzekł on
+                ogromne ilości internautów, jak i mnie. Właściciel często przywdziewa
+                młodą gwiazdę w intrygujące, wielokolorowe stroje.
+                Stworzenie konta na tiktoku i osiągnięcie popularności rzędu milionów
+                wyświetleń pod każdym filmem to nie lada wyczyn. Właściciel Uni wykorzystał
+                to, by stworzyć pluszaka na wzór kota, podpisując umowę z firmą produkującą
+                związane z popkulturą gadżety. 
+            </about>
+            <links>
+                <image source="../resource/catphoto/uni/uni1.png">uni1</image>
+                <image source="../resource/catphoto/uni/uni2.png">uni2</image>
+                <image source="../resource/catphoto/uni/uni3.png">uni3</image>
+                <image source="../resource/catphoto/uni/uni4.png">uni4</image>
+                <link source="https://www.tiktok.com/@unicouniuni?lang=en">TikTok account</link>
+                <link source="https://www.instagram.com/unicouniuni/">Instagram account</link>
+            </links>
+        </cat>
+        <cat gender="female" count='1'>
+            <name>Panko</name>
+            <type>
+                <breed>cross-breed</breed>
+                <furcolor pattern='calico'>White, Grey, Orange</furcolor>
+            </type>
+            <about>
+                Panko jest kotem o ubarwieniu "calico", czyli trójkolorowym. Ma ona
+                lekkiego zeza, co mimo negatywnych efektów na jej zdrowie dodaje do jej
+                uroku. Bardzo lubi ludzkie jedzenie, przez co gdy jest ono
+                przygotowywane często kładzie głowę na stół i patrzy na proces
+                przyrządzania. Właścicielka Panko co jakiś czas ubiera kota w nietypowe
+                stroje i kostiumy, po czym udostępnia efekt na swoich social mediach
+                poświęconych swojemu czworonogowi.
+            </about>
+            <links>
+                <image source="../resource/catphoto/panko/panko1.png">panko1</image>
+                <image source="../resource/catphoto/panko/panko2.png">panko2</image>
+                <image source="../resource/catphoto/panko/panko3.png">panko3</image>
+                <link source="https://tiktok.com/@fatfatpankocat?lang=en">TikTok account</link>
+                <link source="https://www.instagram.com/fatfatpankocat/">Instagram account</link>
+            </links>
+        </cat>
+        <cat gender="both" count='2'>
+            <name>Melon and Finn</name>
+            <type>
+                <breed>unknown</breed>
+                <furcolor pattern='bicolor'>Black and white</furcolor>
+            </type>
+            <about>
+                Melon i Fin to dwa koty, lecz główną rolę odgrywa tutaj Melon. Na wspólnym koncie tiktok
+                właściciel kotów poza normalnymi filmami z wizerunkiem kotów, prowadzi również serię 
+                "Melon be Smellin'" (transl. Melon wącha), w której Melon wącha różne przedmioty.
+                Mimo że przedmioty nie są  nietypowe czy niespotykane, Melon miewa 
+                przesadne reakcje na niektóre z nich, co jest głównym powodem popularności serii.
+                Fin nie jest tak popularny jak Melon, lecz również ma swoją serię filmów o tematyce wąchania - 
+                "Fin be Sniffin'", jak i również swoją autorską serię - "Standin' Sunday".
+            </about>
+            <links>
+                <image source="../resource/catphoto/melonandfin/melon.png">melon</image>
+                <image source="../resource/catphoto/melonandfin/fin.png">fin</image>
+                <link source="https://www.tiktok.com/@melon.n.finn?lang=en">TikTok account</link>
+                <link source="https://www.instagram.com/melon.n.finn/?hl=en">Instagram account</link>
+                <link source="docs.google.com/spreadsheets/d/1IVoW9sCDZsoJlvA2IcdPXOvUmlb2K58bBSVNTQGkZYU/">"Melon be Smellin'" statistics</link>
+            </links>
+        </cat>
+    </cats>
+    <Laplace invented='1809'>
+        <about>
+            Transformata Laplace'a to jedno z najbardziej przydatnych dla inżynierów narzędzi.
+            Zmienia ona funkcję zależną od czasu na funkcję zależną od częstotliwości. Za pomocą dziedziny będącej liczbami zespolonymi, tak jak w przypadku młodszego brata - transformaty Fouriera, możemy wyznaczyć udział poszczególnych częstotliwości i ekspotentów w danej funkcji. Transformata Laplace'a pomaga również w rozwiązywaniu wszelkiego rodzaju równań różniczkowych. 
+        </about>
+        <practice>
+            <definition>
+                <image source="../resource/svg/laplace.svg">Definicja Transformaty Laplace'a</image>
+            </definition>
+            <examples>
+                <example count='1'>
+                    <image source="../resource/svg/laplace/lap11.svg">Funkcja1</image>
+                    <image source="../resource/svg/laplace/lap12.svg">Funkcja2</image>
+                </example> 
+                <example count='2'>
+                    <image source="../resource/svg/laplace/lap21.svg">Funkcja1</image>
+                    <image source="../resource/svg/laplace/lap22.svg">Funkcja2</image>
+                </example>
+                <example count='3'>
+                    <image source="../resource/svg/laplace/lap31.svg">Funkcja1</image>
+                    <image source="../resource/svg/laplace/lap32.svg">Funkcja2</image>
+                </example>
+            </examples>
+        </practice>
+    </Laplace>
+</data>
