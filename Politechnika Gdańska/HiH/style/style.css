@@ -31,15 +31,16 @@ textarea {
 }
 
 #draggable {
-  width: 10vw;
-  height: 10vw;
+  display: grid;
+  width: 200px;
+  height: 200px;
   padding: 0.4em;
   background-color: var(--float-col);
   position: absolute;
   z-index: 2;
   gap: 4px;
-  grid-template-columns: 5vw 5vw;
-  grid-template-rows: 5vw 5vw;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 100px 100px;
   grid-template-areas:
     "social1 social2"
     "social3 social4";
@@ -146,8 +147,8 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: url("../resource/background.png");
   background-position: center;
   background-repeat: no-repeat;

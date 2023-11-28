@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data SYSTEM "./data.dtd">
 <data>
     <author>
         <name>Franciszek</name>
         <surname>Fabiński</surname>
     </author>
-    <cats>
+    <cats> 
         <cat gender="male" count='1'>
             <name>Uni</name>
             <type>
@@ -87,20 +88,20 @@
             <definition>
                 <image source="../resource/svg/laplace.svg">Definicja Transformaty Laplace'a</image>
             </definition>
-            <exmples>
-                <example n='1'>
+            <examples>
+                <example count='1'>
                     <image source="../resource/svg/laplace/lap11.svg">Funkcja1</image>
                     <image source="../resource/svg/laplace/lap12.svg">Funkcja2</image>
                 </example> 
-                <example n='2'>
+                <example count='2'>
                     <image source="../resource/svg/laplace/lap21.svg">Funkcja1</image>
                     <image source="../resource/svg/laplace/lap22.svg">Funkcja2</image>
                 </example>
-                <example n='3'>
+                <example count='3'>
                     <image source="../resource/svg/laplace/lap31.svg">Funkcja1</image>
                     <image source="../resource/svg/laplace/lap32.svg">Funkcja2</image>
                 </example>
-            </exmples>
+            </examples>
         </practice>
     </Laplace>
 </data>

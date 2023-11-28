@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-    <xs:element name="data" type="dataType"/>
-    
-    <xs:complexType name="dataType">
-        <xs:sequence>
-            <xs:element name="author" type="authorType"/>
-            <xs:element name="cats" type="catsType"/>
-            <xs:element name="Laplace" type="LaplaceType"/>
-        </xs:sequence>
-    </xs:complexType>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="data">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="author" type="authorType"/>
+                <xs:element name="cats" type="catsType"/>
+                <xs:element name="Laplace" type="LaplaceType"/>
+            </xs:sequence>
+        </xs:complexType> 
+    </xs:element>   
     
     <xs:complexType name="authorType">
         <xs:sequence maxOccurs="1">
@@ -23,62 +23,108 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="LaplaceType">
-        
-        
-    </xs:complexType>
-    
     <xs:complexType name="catType">
         <xs:sequence maxOccurs="1">
             <xs:element name="name" type="shortStringType"/>
-            <xs:element name="type" type="typeType"/>
+            <xs:element name="type">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="1">
+                        <xs:element name="breed" type="shortStringType"/>
+                        <xs:element name="furcolor">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute ref="pattern"/>
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>        
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>   
+            </xs:element>
             <xs:element name="about" type="longStringType"/>
             <xs:element name="links" type="linksType"/>
         </xs:sequence>    
-        <xs:attribute name="gender">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="male"/>
-                    <xs:enumeration value="female"/>
-                    <xs:enumeration value="both"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="count" type="xs:integer"/>
+        <xs:attribute name="gender" type="genderType" />
+        <xs:attribute ref="count" />
     </xs:complexType>
     
-    <xs:complexType name="typeType">
-        <xs:sequence maxOccurs="1">
-            <xs:element name="breed" type="shortStringType"/>
-            <xs:element name="furcolor" type="furcolorType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="furcolorType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="pattern">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="tuxedo"/>
-                            <xs:enumeration value="calico"/>
-                            <xs:enumeration value="tabby"/>
-                            <xs:enumeration value="solid"/>
-                            <xs:enumeration value="bicolor"/>
-                            <xs:enumeration value="tricolor"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-
     <xs:complexType name="linksType">
         <xs:sequence maxOccurs="unbounded" minOccurs="1">
             <xs:element ref="image" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element ref="link" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="LaplaceType">
+        <xs:sequence>
+            <xs:element name="about" type="longStringType"/>
+            <xs:element name="practice">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="definition">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element ref="image"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="examples">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="example" maxOccurs="unbounded" minOccurs="1">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="image" type="addresstype" maxOccurs="2" minOccurs="2"/>
+                                            </xs:sequence>
+                                            <xs:attribute ref="count"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="invented">
+            <xs:simpleType>
+                <xs:restriction base="xs:gYear"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    
+    
+    <xs:attribute name="pattern">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="tuxedo"/>
+                <xs:enumeration value="calico"/>
+                <xs:enumeration value="tabby"/>
+                <xs:enumeration value="solid"/>
+                <xs:enumeration value="bicolor"/>
+                <xs:enumeration value="tricolor"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    
+    <xs:simpleType name="genderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="male"/>
+            <xs:enumeration value="female"/>
+            <xs:enumeration value="both"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:attribute name="count">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:minInclusive value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
     
     <xs:simpleType name="shortStringType">
         <xs:restriction base="xs:string">
@@ -106,32 +152,3 @@
     <xs:element name="link" type="addresstype"/>
     
 </xs:schema>
-
-
-
-
-
-
-
-<!-- 
-     count
-     
--     6 definicje globalne typów złożonych:  1.6pkt
-     6 definicje globalne typów prostych:
-     4 definicje lokalne typów złożonych:
-     4 definicje lokalne typów prostych:
-     różne modele wyborów:
-     definicja grupy:
-     4 poziomy zagłębienia: 0.4pkt
-     6 atrybutów + 1 globalny:
-     12 różnych elementów:
-     5 elementów z podelementami:
-     minlength, maxLength, i inne aspekty 4 różne:
-     pattern i enumeration:
-     wyprowadzenie typów:
-     3 odnośniki ref do atrybutu i elementu:
-     lista z długością ograniczeniem wartości i wykorzystanie w xml:
-     wykorzystanie union:
-     4 typy wbudowane:
-     walidowanie!!! 
--->
