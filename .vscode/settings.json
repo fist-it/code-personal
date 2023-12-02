@@ -1,4 +1,5 @@
 {
     "python.analysis.typeCheckingMode": "basic",
     "C_Cpp.errorSquiggles": "enabled"
+    
 }
