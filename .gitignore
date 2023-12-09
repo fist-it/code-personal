@@ -1,6 +1,7 @@
 # ignore .vscode directory
-.vscode/
+.vscode
 cpp/.vscode/
+.vscode/settings.json
 
 # ignore node_modules directory
 node_modules/
@@ -10,6 +11,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.json
-*.code-workspace
+./code.code-workspace
 *.exe
 cpp/main.cpp
+cpp/*dSYM/
+*.txt
