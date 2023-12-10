@@ -3,6 +3,15 @@
 #include <time.h>
 
 
+/*
+WHITE - 1
+BLACK - 0
+
+board:
+WHITE > 0
+BLACK < 0
+*/
+
 // BOARD
 const int BOARD_SIZE = 24;
 const int LEFT = 3;
@@ -13,6 +22,7 @@ const int BOARD_WIDTH = 45;
 const int BOARD_HEIGHT = 16;
 const int BAR_L = 23;
 const int BAR_R = 28;
+const int BAR_Y = 11;
 
 // MENU
 const int OPTION_X = 52;
@@ -20,8 +30,8 @@ const int OPTION_Y = 4;
 const int INFO_X = 2;
 const int INFO_Y = 23;
 
-const int NUMBER_INPUT_Y = 25;
-const int NUMBER_INPUT_X = 2;
+const int NUMBER_INPUT_Y = 21;
+const int NUMBER_INPUT_X = 44;
 
 const int DICE_DEBUG_X = 3;
 const int DICE_DEBUG_Y = 26;
@@ -35,11 +45,14 @@ const int DEBUG_BOARD_X = 3;
 const int WARNING_Y = 25;
 const int WARNING_X = 20;
 
-const int HIT_X = 12;
-const int HIT_Y = 25;
+const int HIT_X = 52;
+const int HIT_Y = 12;
 
 const int COMEBACK_X = 52;
 const int COMEBACK_Y = 10;
+
+const int HOME_X = 10;
+const int HOME_Y = 30;
 //PLAYER2 ON Y=22
 
 const int BAR_DEBUG_X = 20;
@@ -52,6 +65,7 @@ typedef struct
 	int dice[2];
 	int turn;
 	int home[2];
+	int at_home[2];
 	int menu;
 	int bar[2];
 } backgammon_t;
@@ -289,6 +303,45 @@ void load_lower_right_white(backgammon_t *game)
 	}
 }
 
+void load_bar_white(backgammon_t* game){
+	int j = 0;
+	while(j < game->bar[0] && j < 6){
+		mvprintw(BAR_Y - 2 - j, BAR_L + 2, "WW");
+		j++;
+	}
+	if(game->bar[0] > 5){
+		mvprintw(BAR_Y - 7, BAR_L + 2, "+%d", game->bar[0]-5);
+	}
+}
+
+void load_bar_black(backgammon_t* game){
+	int j = 0;
+	while(j < game->bar[1] && j < 6){
+		mvprintw(BAR_Y + 2 + j, BAR_L + 2, "BB");
+		j++;
+	}
+	if(game->bar[1] > 5){
+		mvprintw(BAR_Y + 7, BAR_L + 2, "+%d", game->bar[1]-5);
+	}
+}
+
+void load_bar(backgammon_t* game){
+	load_bar_white(game);
+	load_bar_black(game);
+}
+
+void clear_bar(){
+	for(int i=0; i<6; i++){
+		mvprintw(BAR_Y - 1 - i, BAR_L + 2, "  ");
+		mvprintw(BAR_Y + 1 + i, BAR_L + 2, "  ");
+	}
+}
+
+void clear_bar_info(){
+	move(WARNING_Y-1, WARNING_X);
+	clrtoeol();
+}
+
 void load_board(backgammon_t game)
 {
 	load_upper_right_white(&game);
@@ -299,6 +352,8 @@ void load_board(backgammon_t game)
 	load_lower_left_black(&game);
 	load_lower_right_white(&game);
 	load_lower_right_black(&game);
+	clear_bar();
+	load_bar(&game);
 }
 
 void debug_board(backgammon_t game)
@@ -307,6 +362,11 @@ void debug_board(backgammon_t game)
 	{
 		mvprintw(DEBUG_BOARD_Y + i, DEBUG_BOARD_X, " %d : %d", i,  game.board[i]);
 	}
+}
+
+void print_home(backgammon_t* game){
+	mvprintw(HOME_Y, HOME_X, "White pawns at home: %d", game->at_home[0]);
+	mvprintw(HOME_Y+1, HOME_X, "Black pawns at home: %d", game->at_home[1]);
 }
 //input long numbers
 void clear_number(){
@@ -319,37 +379,102 @@ void clear_hit(){
 	clrtoeol();
 }
 
+void exit_game()
+{
+	clear();
+	echo();
+	endwin();
+	exit(0);
+}
+
 int get_number()
 {
 	int number = 1;
 	mvprintw(NUMBER_INPUT_Y, NUMBER_INPUT_X, "%d", number);
 	while (1)
 	{
-		
 		int ch = getch();
 		switch (ch)
 		{
 		case KEY_UP:
 			clear_number();
 			number++;
+			if(number > 24){
+				number = 1;
+			}
 			mvprintw(NUMBER_INPUT_Y, NUMBER_INPUT_X, "%d", number);
 			break;
 		case KEY_DOWN:
+		
 			clear_number();
+			if(number == 1){
+				number = 25;
+			}
 			number--;
 			mvprintw(NUMBER_INPUT_Y, NUMBER_INPUT_X, "%d", number);
 			break;
 		case KEY_RIGHT:
 			clear_number();
 			return number-1;
+		case KEY_LEFT:
+			exit_game();
+			break;
 		}
 	}
+}
+
+void print_dice(backgammon_t* game){
+	mvprintw(DICE_DEBUG_Y, DICE_DEBUG_X, "Dice 1 = %d", game->dice[0]);
+	mvprintw(DICE_DEBUG_Y + 1, DICE_DEBUG_X, "Dice 2 = %d", game->dice[1]);
 }
 
 void clear_info()
 {
 	move(INFO_Y, INFO_X);
 	clrtoeol();
+}
+
+void clear_comeback(){
+	move(COMEBACK_Y, COMEBACK_X);
+	clrtoeol();
+}
+
+void clear_bar_debug(){
+	move(BAR_DEBUG_Y, BAR_DEBUG_X);
+	clrtoeol();
+	move(BAR_DEBUG_Y+1, BAR_DEBUG_X);
+	clrtoeol();
+}
+
+void count_home(backgammon_t *game)
+{
+	game->home[0] = game->at_home[0];
+	game->home[1] = game->at_home[0];
+	for (int i = 0; i < 6; i++)
+	{
+		if(game->board[BOARD_SIZE-i-1]>0){
+			game->home[0] = game->home[0] + game->board[BOARD_SIZE-i-1];
+		}
+	}
+	for(int i=0; i<6; i++){
+		if(game->board[i]<0){
+			game->home[1] += -1*game->board[i];
+		}
+	}
+
+}
+
+void load_rest(backgammon_t* game, FILE *fp){
+		fscanf(fp, "%d", &game->dice[0]);
+		fscanf(fp, "%d", &game->dice[1]);
+		fscanf(fp, "%d", &game->turn);
+		fscanf(fp, "%d", &game->at_home[0]);
+		fscanf(fp, "%d", &game->at_home[1]);
+		fscanf(fp, "%d", &game->menu);
+		fscanf(fp, "%d", &game->bar[0]);
+		fscanf(fp, "%d", &game->bar[1]);
+		game->home[0] = 0;
+		game->home[1] = 0;
 }
 
 void load_from_file(backgammon_t* game){
@@ -361,57 +486,60 @@ void load_from_file(backgammon_t* game){
 	}
 	else{
 		for(int i=0; i<BOARD_SIZE; i++){
-			fscanf(fp, "%d", &game->board[i]);
+			if(i < 12){
+				fscanf(fp, "%d ", &game->board[11-i]);
+				if(i == 11){
+					fscanf(fp, "\n");
+				}
+			}
+			else{
+				fscanf(fp, "%d", &game->board[i]);
+			}
 		}
-		fscanf(fp, "%d", &game->dice[0]);
-		fscanf(fp, "%d", &game->dice[1]);
-		fscanf(fp, "%d", &game->turn);
-		fscanf(fp, "%d", &game->home[0]);
-		fscanf(fp, "%d", &game->home[1]);
-		fscanf(fp, "%d", &game->menu);
-		fscanf(fp, "%d", &game->bar[0]);
-		fscanf(fp, "%d", &game->bar[1]);
+		load_rest(game, fp);
 		fclose(fp);
 		mvprintw(OPTION_Y+2, OPTION_X-1, " ");
-		game->menu=0;
 		clear_info();
-		
 	}
+	count_home(game);
+	print_home(game);
+}
+
+void save_rest(backgammon_t* game, FILE *fp){
+	fprintf(fp, "\n");
+	fprintf(fp, "%d ", game->dice[0]);
+	fprintf(fp, "%d ", game->dice[1]);
+	fprintf(fp, "\n");
+	fprintf(fp, "%d ", game->turn);
+	fprintf(fp, "\n");
+	fprintf(fp, "%d ", game->at_home[0]);
+	fprintf(fp, "%d ", game->at_home[1]);
+	fprintf(fp, "\n");
+	fprintf(fp, "%d ", game->menu);
+	fprintf(fp, "\n");
+	fprintf(fp, "%d ", game->bar[0]);
+	fprintf(fp, "%d ", game->bar[1]);
 }
 
 void save_to_file(backgammon_t* game){
 	FILE *fp;
 	fp = fopen("save.txt", "w");
-	fprintf(fp, "board: ");
 	for(int i=0; i<BOARD_SIZE; i++){
-		fprintf(fp, "%d ", game->board[i]);
+		if(i < 12){
+			fprintf(fp, "%d ", game->board[11-i]);
+			if(i == 11){
+				fprintf(fp, "\n");
+			}
+		}
+		else{
+			fprintf(fp, "%d ", game->board[i]);
+		}
 	}
-	fprintf(fp, "\n");
-	fprintf(fp, "dice: ");
-	fprintf(fp, "%d ", game->dice[0]);
-	fprintf(fp, "%d ", game->dice[1]);
-	fprintf(fp, "\n");
-	fprintf(fp, "turn: ");
-	fprintf(fp, "%d ", game->turn);
-	fprintf(fp, "\n");
-	fprintf(fp, "home: ");
-	fprintf(fp, "%d ", game->home[0]);
-	fprintf(fp, "%d ", game->home[1]);
-	fprintf(fp, "\n");
-	fprintf(fp, "menu: ");
-	fprintf(fp, "%d ", game->menu);
-	fprintf(fp, "\n");
-	fprintf(fp, "bar: ");
-	fprintf(fp, "%d ", game->bar[0]);
-	fprintf(fp, "%d ", game->bar[1]);
+	save_rest(game, fp);
 	fclose(fp);
 }
 
 // GUI
-
-
-
-
 
 void clear_double()
 {
@@ -569,6 +697,11 @@ void refresh_board(backgammon_t *game)
 {
 	draw_board(game);
 	load_board(*game);
+
+}
+
+void invalid_move(){
+	mvprintw(WARNING_Y, WARNING_X, "Invalid move!");
 }
 
 void menu_choice(backgammon_t *game, int direction)
@@ -595,28 +728,27 @@ void menu_choice(backgammon_t *game, int direction)
 	}
 }
 
-void exit_game()
-{
-	clear();
-	echo();
-	endwin();
-	exit(0);
-}
-
 // GAME
 
-void count_home(backgammon_t *game)
-{
-	game->home[0] = 0;
-	game->home[1] = 0;
-	for (int i = 0; i < 6; i++)
-	{
-		if(game->board[i]<0){
-			game->home[1] += -1*game->board[i];
-		}
-		if(game->board[BOARD_SIZE-i-1]>0){
-			game->home[0] += game->board[BOARD_SIZE-i-1];
-		}
+void win(int person, backgammon_t* game){
+	clear();
+	if(!person){
+		mvprintw(0, 0, "White wins with oponent having %d pieces at home!", game->at_home[1]);
+	}
+	else{
+		mvprintw(0, 0, "Black wins with oponent having %d pieces at home!", game->at_home[0]);
+	}
+	mvprintw(1, 0, "Press any key to exit!");
+	getch();
+	exit_game();
+}
+
+void eval_win(backgammon_t* game){
+	if(game->at_home[0] >= 15){
+		win(0, game);
+	}
+	else if(game->at_home[1] >= 15){
+		win(1, game);
 	}
 }
 
@@ -676,13 +808,14 @@ int check_and_execute_hit_white(backgammon_t* game, int dice) {
 				refresh_board(game);
 				clear_hit();
 				mvprintw(HIT_Y, HIT_X, "Hit at %d!", i+dice+1);
+				mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+				mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
 				return 1;
 			}
 		}
 	}
 	return 0;
 }
-
 
 int check_and_execute_hit_black(backgammon_t* game, int dice){
 	for(int i=BOARD_SIZE-1; i>=0; i--){
@@ -694,6 +827,8 @@ int check_and_execute_hit_black(backgammon_t* game, int dice){
 				refresh_board(game);
 				clear_hit();
 				mvprintw(HIT_Y, HIT_X, "Hit at %d!", i-dice+1);
+				mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+				mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
 				return 1;
 			}
 		}
@@ -701,96 +836,313 @@ int check_and_execute_hit_black(backgammon_t* game, int dice){
 	return 0;
 }
 
+void hit_black_to_white(backgammon_t* game, int from, int to){
+	game->board[from]++;
+	game->board[to] = -1;
+	game->bar[0]++;
+	mvprintw(HIT_Y, HIT_X, "Hit at %d!", to+1);
+	mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+	mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
+	refresh_board(game);
+}
+
+void hit_white_to_black(backgammon_t* game, int from, int to){
+	game->board[from]--;
+	game->board[to] = 1;
+	game->bar[1]++;
+	mvprintw(HIT_Y, HIT_X, "Hit at %d!", to+1);
+	mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+	mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
+	refresh_board(game);
+}
+
+void move_white(backgammon_t* game, int dice);
+void move_black(backgammon_t* game, int dice);
+
+void end_phase_white(backgammon_t* game, int from, int dice){
+	if(game->board[from] > 0){
+		if(from + dice >= BOARD_SIZE){
+				game->board[from]--;
+				game->at_home[0]++;
+				refresh_board(game);
+			}
+			else{
+				game->board[from]--;
+				game->board[from+dice]++;
+				refresh_board(game);
+				mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from+1, from+dice+1);
+			}
+		}
+		else{
+			invalid_move();
+			move_white(game, dice);
+		}
+	}
+
+
+void end_phase_black(backgammon_t* game, int from, int dice){
+	if(game->board[from] < 0){
+		if(from - dice <= -1){
+			game->board[from]++;
+			game->at_home[1]++;
+			refresh_board(game);
+		}
+		else{
+			game->board[from]++;
+			game->board[from-dice]--;
+			refresh_board(game);
+			mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from+1, from-dice+1);
+		}
+	}
+	else{
+		invalid_move();
+		move_black(game, dice);
+	}
+}
+
+
 void move_white(backgammon_t* game, int dice){
+	eval_win(game);
 	clear_player_info();
-	
 	mvprintw(PLAYER_INFO_Y, PLAYER_INFO_X, "Choose your move by index (moving by %d): ", dice);
 	int from = get_number();
-	if(game->board[from] > 0 && game->board[from+dice] >= 0 && from+dice < BOARD_SIZE && from >= 0){
+	if(game->home[0] >= 15){
+		end_phase_white(game, from, dice);
+	}
+	else{
+		if(game->board[from] > 0 && game->board[from+dice] >= 0 && from+dice < BOARD_SIZE && from >= 0){
 		game->board[from]--;
 		game->board[from+dice]++;
 		refresh_board(game);
-		mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from, from+dice);
+		mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from+1, from+dice+1);
 		clear_warning();
+		}
+
+	//NIE WYMUSZONE BICIE
+	/*
+	else if(game->board[from] > 0 && game->board[from+dice] == -1 && from+dice < BOARD_SIZE && from >= 0){
+		hit_white_to_black(game, from, from+dice);
 	}
-	else{
-		mvprintw(WARNING_Y, WARNING_X,  "Invalid move!");
-		move_white(game, dice);
+	*/
+
+
+		else{
+			invalid_move();
+			move_white(game, dice);
+		}
 	}
+	refresh_board(game);
 	//debug_board(*game);
-	mvprintw(DICE_DEBUG_Y, DICE_DEBUG_X, "Dice 1 = %d", game->dice[0]);
-		mvprintw(DICE_DEBUG_Y + 1, DICE_DEBUG_X, "Dice 2 = %d", game->dice[1]);
+	print_home(game);
+
 }
 
 void move_black(backgammon_t* game, int dice){
+	eval_win(game);
 	clear_player_info();
 	mvprintw(PLAYER_INFO_Y, PLAYER_INFO_X, "Choose your move by index (moving by %d): ", dice);
 	int from = get_number();
-	if(game->board[from] < 0 && game->board[from-dice] <= 0 && from-dice >= 0 && from < BOARD_SIZE){
+	if(game->home[1] >= 15){
+		end_phase_black(game, from, dice);
+	}
+	else{
+		if(game->board[from] < 0 && game->board[from-dice] <= 0 && from-dice >= 0 && from < BOARD_SIZE){
 		game->board[from]++;
 		game->board[from-dice]--;
 		refresh_board(game);
-		mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from, from-dice);
+		mvprintw(PLAYER_INFO_Y + 1, PLAYER_INFO_X, "Moved from %d to %d", from+1, from-dice+1);
 		clear_warning();
+		}
+	//NIE WYMUSZONE BICIE
+	/*
+	else if(game->board[from] < 0 && game->board[from-dice] == 1 && from-dice >= 0 && from < BOARD_SIZE){
+		hit_black_to_white(game, from, from-dice);
 	}
-	else{
-		mvprintw(WARNING_Y, WARNING_X,  "Invalid move!");
-		move_black(game, dice);
+	*/
+		else{
+			invalid_move();
+			move_black(game, dice);
+		}
 	}
+	refresh_board(game);
 	//debug_board(*game);
-	mvprintw(DICE_DEBUG_Y, DICE_DEBUG_X, "Dice 1 = %d", game->dice[0]);
-		mvprintw(DICE_DEBUG_Y + 1, DICE_DEBUG_X, "Dice 2 = %d", game->dice[1]);
+	print_home(game);
 }
 
+void comeback_white_dice1(backgammon_t* game){
+	clear_info();
+	mvprintw(COMEBACK_Y, COMEBACK_X, "White came back at %d!", game->dice[0]+1);
+	if(game->board[game->dice[0]-1] == -1){
+		game->bar[1]++;
+	}
+	game->board[game->dice[0]-1] = 1;
+	game->bar[0]--;
+	refresh_board(game);
+}
+
+void comeback_white_dice2(backgammon_t* game){
+	clear_info();
+	mvprintw(COMEBACK_Y, COMEBACK_X, "White came back at %d!", game->dice[1]+1);
+	if(game->board[game->dice[1]-1] == -1){
+		game->bar[1]++;
+	}
+	game->board[game->dice[1]-1] = 1;
+	game->bar[0]--;
+	refresh_board(game);
+}
 
 void check_comeback_white(backgammon_t* game){
 	if(game->board[game->dice[0]-1] == 0 || game->board[game->dice[1]-1] == -1){
-		clear_info();
-		mvprintw(COMEBACK_Y, COMEBACK_X, "White came back at %d!", game->dice[0]);
-		if(game->board[game->dice[0]-1] == -1){
-			game->bar[1]++;
-		}
-		game->board[game->dice[0]-1] = 1;
-		game->bar[0]--;
-		refresh_board(game);
+		comeback_white_dice1(game);
 	}
 	else if(game->board[game->dice[1]-1] == 0 || game->board[game->dice[1]-1] == -1){
-		clear_info();
-		mvprintw(COMEBACK_Y, COMEBACK_X, "White came back at %d!", game->dice[1]);
-		if(game->board[game->dice[1]-1] == -1){
-			game->bar[1]++;
-		}
-		game->board[game->dice[1]-1] = 1;
-		game->bar[0]--;
-		refresh_board(game);
+		comeback_white_dice1(game);
 	}
+	mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+	mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
 	
+}
+
+void comeback_black_dice1(backgammon_t* game){
+	clear_info();
+	mvprintw(COMEBACK_Y, COMEBACK_X, "Black came back at %d!", BOARD_SIZE-game->dice[0]+1);
+	if(game->board[BOARD_SIZE-game->dice[0]] == 1){
+		game->bar[0]++;
+	}
+	game->board[BOARD_SIZE-game->dice[0]] = -1;
+	game->bar[1]--;
+	refresh_board(game);
+}
+
+void comeback_black_dice2(backgammon_t* game){
+	clear_info();
+	mvprintw(COMEBACK_Y, COMEBACK_X, "Black came back at %d!", BOARD_SIZE-game->dice[1]+1);
+	if(game->board[BOARD_SIZE-game->dice[1]] == 1){
+		game->bar[0]++;
+	}
+	game->board[BOARD_SIZE-game->dice[1]] = -1;
+	game->bar[1]--;
+	refresh_board(game);
 }
 
 void check_comeback_black(backgammon_t* game){
 	if(game->board[BOARD_SIZE-game->dice[0]] == 0 || game->board[BOARD_SIZE-game->dice[1]] == 1){
-		clear_info();
-		mvprintw(WARNING_Y, WARNING_X, "Black came back!");
-		if(game->board[BOARD_SIZE-game->dice[0]] == 1){
-			game->bar[0]++;
-		}
-		game->board[BOARD_SIZE-game->dice[0]] = -1;
-		game->bar[1]--;
-		refresh_board(game);
+		comeback_black_dice1(game);
 	}
 	else if(game->board[BOARD_SIZE-game->dice[1]] == 0 || game->board[BOARD_SIZE-game->dice[1]] == 1){
-		clear_info();
-		mvprintw(WARNING_Y, WARNING_X, "Black came back!");
-		if(game->board[BOARD_SIZE-game->dice[1]] == 1){
-			game->bar[0]++;
+		comeback_black_dice2(game);
+	}
+		mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
+		mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
+}
+
+//FIX >555b
+
+void white_bar(backgammon_t* game){
+	mvprintw(WARNING_Y, WARNING_X, "White has pieces in bar!");
+	check_comeback_white(game);
+}
+
+void black_bar(backgammon_t* game){
+	mvprintw(WARNING_Y, WARNING_X, "Black has pieces in bar!");
+	check_comeback_black(game);
+}
+
+void move_double(backgammon_t* game){
+	clear_warning();
+		clear_double();
+		mvprintw(INFO_Y+1, INFO_X, "Double!");
+		for (int i = 0; i < 4; i++)
+		{
+			if(game->turn%2==0){
+				if(game->bar[0] < 1){
+					//WYMUSZENIE BICIA
+					
+					if(check_and_execute_hit_white(game, game->dice[0])){
+						continue;
+					}
+					else{
+						move_white(game, game->dice[0]);
+						print_dice(game);
+					}	
+				//NIE WYMUSZENIE BICIA
+				//move_white(game, game->dice[0]);
+				//print_dice(game);
+				}
+				else{
+					white_bar(game);
+					break;
+				}
+			}
+			else{
+				if(game->bar[1]>0){
+					black_bar(game);
+				}
+				//WYMUSZENIE BICIA
+				
+				if(check_and_execute_hit_black(game, game->dice[0])){
+					continue;
+				}
+				else{
+					move_black(game, game->dice[0]);
+					print_dice(game);
+				}
+				//NIE WYMUSZENIE BICIA
+				//move_black(game, game->dice[0]);
+				
+			}
+			eval_win(game);
 		}
-		game->board[BOARD_SIZE-game->dice[1]] = -1;
-		game->bar[1]--;
-		refresh_board(game);
+}
+
+void white_turn(backgammon_t* game){
+	if(game->bar[0] < 1){
+		mvprintw(INFO_Y, INFO_X, "White turn!");
+		//WYMUSZENIE BICIA
+		if(!check_and_execute_hit_white(game, game->dice[0])){
+			move_white(game, game->dice[0]);
+			print_dice(game);
+		}
+		if(!check_and_execute_hit_white(game, game->dice[1])){
+			move_white(game, game->dice[1]);
+		}
+		//NIE WYMUSZENIE BICIA
+		//move_white(game, game->dice[0]);
+		//move_white(game, game->dice[1]);
+	clear_info();
+	}
+	else{
+		mvprintw(INFO_Y, INFO_X, "White has pieces in bar!");
+		check_comeback_white(game);
+	}
+}
+
+void black_turn(backgammon_t* game){
+	if(game->bar[1] < 1){
+		mvprintw(INFO_Y, INFO_X, "Black turn!");
+			//WYMUSZENIE BICIA
+			if(!check_and_execute_hit_black(game, game->dice[0])){
+				move_black(game, game->dice[0]);
+			}
+			if(!check_and_execute_hit_black(game, game->dice[1])){
+				move_black(game, game->dice[1]);
+			}
+		//NIE WYMUSZENIE BICIA
+		//move_black(game, game->dice[0]);
+		//move_black(game, game->dice[1]);
+		clear_info();
+	}
+	else{
+		mvprintw(INFO_Y, INFO_X, "Black has pieces in bar!");
+		check_comeback_black(game);
 	}
 }
 
 void roll_dice(backgammon_t* game){
+	eval_win(game);
+	clear_bar_info();
+	clear_warning();
+	clear_comeback();
 	clear_double();
 	if (game->turn == -1)
 	{
@@ -802,94 +1154,38 @@ void roll_dice(backgammon_t* game){
 	{
 		clear_player_info();
 		roll(game);
-		mvprintw(DICE_DEBUG_Y, DICE_DEBUG_X, "Dice 1 = %d", game->dice[0]);
-		mvprintw(DICE_DEBUG_Y + 1, DICE_DEBUG_X, "Dice 2 = %d", game->dice[1]);
-		mvprintw(BAR_DEBUG_Y, BAR_DEBUG_X, "Bar 1 = %d", game->bar[0]);
-		mvprintw(BAR_DEBUG_Y + 1, BAR_DEBUG_X, "Bar 2 = %d", game->bar[1]);
+		print_dice(game);
+		//DOUBLE
 		if (check_double(game))
 		{
-			clear_info();
-			mvprintw(INFO_Y+1, INFO_X, "Double!");
-			for (int i = 0; i < 4; i++)
-			{
-				if(game->turn%2==0){
-					if(game->bar[0] < 1){
-						if(check_and_execute_hit_white(game, game->dice[0])){
-							continue;
-						}
-						else{
-							move_white(game, game->dice[0]);
-						}
-					}
-					else{
-						mvprintw(INFO_Y, INFO_X, "White has pieces in bar!");
-						check_comeback_white(game);
-						break;
-					}
-				}
-				else{
-					if(game->bar[1]>0){
-						mvprintw(INFO_Y, INFO_X, "Black has pieces in bar!");
-						check_comeback_black(game);
-					}
-					if(check_and_execute_hit_black(game, game->dice[0])){
-						continue;
-					}
-					else{
-						move_black(game, game->dice[0]);
-					}
-					
-				}
-			}
+			move_double(game);
 		}
+		//NO DOUBLE
 		else
 		{
 			clear_info();
 			mvprintw(INFO_Y, INFO_X, "Not double!");
 			// choose 2 moves with different values
 			if(game->turn%2 == 0){
-				if(game->bar[0] < 1){
-					mvprintw(INFO_Y, INFO_X, "White turn!");
-					if(!check_and_execute_hit_white(game, game->dice[0])){
-						move_white(game, game->dice[0]);
-					}
-					if(!check_and_execute_hit_white(game, game->dice[1])){
-						move_white(game, game->dice[1]);
-					}
-				clear_info();
-				}
-				else{
-					mvprintw(INFO_Y, INFO_X, "White has pieces in bar!");
-					check_comeback_white(game);
-				}
+				white_turn(game);
 			}
 				
 			else{
-				if(game->bar[1] < 1){
-					mvprintw(INFO_Y, INFO_X, "Black turn!");
-						if(!check_and_execute_hit_black(game, game->dice[0])){
-							move_black(game, game->dice[0]);
-						}
-						if(!check_and_execute_hit_black(game, game->dice[1])){
-							move_black(game, game->dice[1]);
-						}
-					clear_info();
-				}
-				else{
-					mvprintw(INFO_Y, INFO_X, "Black has pieces in bar!");
-					check_comeback_black(game);
-				}
+				black_turn(game);
 			}
-			
 		}
 		game->turn++;
 		refresh_board(game);
 		clear_hit();
 	}
 	count_home(game);
+	eval_win(game);
 }
 
 // MAIN
+
+
+
 int start_game(backgammon_t *game)
 {
 
@@ -969,6 +1265,8 @@ int init_game_var(backgammon_t *game)
 	game->dice[1] = 0;
 	game->home[0] = 0;
 	game->home[1] = 0;
+	game->at_home[0] = 0;
+	game->at_home[1] = 0;
 	game->menu = 0;
 	game->bar[0] = 0;
 	game->bar[1] = 0;
