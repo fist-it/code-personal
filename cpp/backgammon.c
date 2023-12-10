@@ -13,7 +13,7 @@ BLACK < 0
 */
 
 // BOARD
-const int BOARD_SIZE = 24;
+#define BOARD_SIZE 24
 const int LEFT = 3;
 const int RIGHT = 48;
 const int DOWN = 19;
