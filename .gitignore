@@ -13,3 +13,4 @@ Thumbs.db
 *.code-workspace
 *.exe
 cpp/main.cpp
+cpp/main.c
