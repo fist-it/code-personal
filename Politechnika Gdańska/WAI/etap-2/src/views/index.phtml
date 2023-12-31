@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moje Zainteresowania</title>
+    <link rel="stylesheet" type="text/css" href="./static/style/style.css" />
+    <link rel="icon" type="image/x-icon" href="./static/resource/svg/Ficon.svg" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <?php
+    include "./static/partial/top.phtml";
+    ?>
+      <main>
+        <h5>Nazywam się Franciszek Fabiński.</h5>
+      </main>
+      <div class="content">
+        <p>
+          Jestem na pierwszym roku studiów na kierunku Informatyka na
+          Politechnice Gdańskiej. Strona ta jest moim projektem na przedmiot
+          Hipertekst i Hipermedia oraz Wytwarzanie Aplikacji Internetowych.
+          Znajdziesz tutaj informacje dotyczące moich zainteresowań.
+        </p>
+      </div>
+    </div>
+    <script src="./static/resource/JavaScript/submittext.js"></script>
+
+    <script src="./static/resource/JavaScript/mimo84-bootstrap-maxlength-335860e/src/bootstrap-maxlength.js"></script>
+    <script>
+      $("textarea").maxlength({
+        alwaysShow: true,
+        threshold: 10,
+        warningClass: "label label-info",
+        limitReachedClass: "label label-warning",
+        placement: "top",
+        preText: "used ",
+        separator: " of ",
+        postText: " chars.",
+      });
+
+      $(function () {
+        $(document).tooltip();
+      });
+
+      $(function () {
+        $("#draggable").draggable();
+      });
+    </script>
+  </body>
+</html>

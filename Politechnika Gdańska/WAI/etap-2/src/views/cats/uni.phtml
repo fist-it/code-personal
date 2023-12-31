@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moje Zainteresowania</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/singlecat.css" />
+    <link rel="icon" type="image/x-icon" href="/static/resource/svg/Ficon.svg" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+      .popup {
+        display: none;
+      }
+      .accept {
+        display: none;
+      }
+    </style>
+    <noscript>
+      <style>
+        .popup {
+          display: flex;
+        }
+        .accept {
+          display: block;
+        }
+      </style>
+    </noscript>
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+  </head>
+
+  <body>
+    <div class="popup">
+      Jeśli to widzisz, twój JavaScript jest wyłączony. Proszę włącz go by mieć
+      pewność, że strona działała poprawnie.
+    </div>
+
+    <script>
+      window.onload = async function () {
+        var popup = document.querySelector(".popup");
+        popup.parentNode.removeChild(popup);
+      };
+    </script>
+
+    <div id="draggable" class="ui-widget-content" title="Draggable">
+      <div class="social1">
+        <a href="https://github.com/fist-it" target="_blank">
+          <img
+            height="50"
+            width="50"
+            alt="github logo"
+            src="/static/resource/svg/github-mark.svg"
+          />
+        </a>
+      </div>
+      <div class="social2">
+        <a
+          href="https://www.linkedin.com/in/franciszek-fabiński-a2688b233/"
+          target="_blank"
+          ><img
+            height="50"
+            width="50"
+            alt="linkedin logo"
+            src="/static/resource/svg/LinkedIn_icon.svg"
+        /></a>
+      </div>
+      <div class="social3">
+        <a href="mailto:fist_it@protonmail.com"
+          ><img
+            height="50"
+            width="50"
+            alt="protonmail logo"
+            src="/static/resource/svg/proton-mail-seeklogo.com.svg"
+        /></a>
+      </div>
+      <div class="social4">
+        <a href="https://gitlab.com/fist-it"
+          ><img
+            height="50"
+            width="50"
+            alt="gitlab logo"
+            src="/static/resource/svg/gitlab_logo.svg"
+        /></a>
+      </div>
+    </div>
+
+    <div class="layout">
+      <header id="top">
+        <a href="/index">Strona główna</a>
+      </header>
+
+      <nav>
+        <ul>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn"><b>Koty</b></button>
+              <div class="dropdown-content">
+                <a href="/cats">Wstęp</a>
+                <a href="/cats/uni">Uni</a>
+                <a href="/cats/panko">Panko</a>
+                <a href="/cats/melonandfin">Melon i Fin</a>
+                <a href="/galeria">Galeria kotów</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="/translapl"><b>Transformata Laplace'a</b></a>
+          </li>
+          <li>
+            <a href="#confirmationContainer">Zgłoś błąd</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="content">
+        Kot Uni posiada dedykowane
+        <strong
+          ><a href="https://www.tiktok.com/@unicouniuni?lang=en"
+            >konto na tiktoku</a
+          ></strong
+        >, gdzie jego właściciel publikuje filmy z jego wizerunkiem. Jest kotem
+        w "smokingu", o czarno-białym namaszczeniu z charakterystycznym znakiem
+        przy jamie ustnej układającym się w "3". Z powodu tej cechy urzekł on
+        ogromne ilości internautów, jak i mnie. Właściciel często przywdziewa
+        młodą gwiazdę w intrygujące, wielokolorowe stroje.
+        Stworzenie konta na tiktoku i osiągnięcie popularności rzędu milionów
+        wyświetleń pod każdym filmem to nie lada wyczyn. Właściciel Uni wykorzystał
+        to, by stworzyć pluszaka na wzór kota, podpisując umowę z firmą produkującą
+        związane z popkulturą gadżety. 
+      </div>
+
+      <footer id="confirmationContainer">
+        <p>
+          Strona stworzona przez:
+          <a href="mailto:s197797@student.pg.edu.pl">Franciszek Fabiński</a>
+        </p>
+
+        <form id="bugForm" method="get" action="/odbierz.php">
+          Jeśli napotkałeś/aś jakieś problemy na stronie, proszę zgłoś je tutaj:
+          <br />
+          <br />
+          <textarea id="txtbug" maxlength="200"></textarea>
+          <input type="submit" value="Wyślij" />
+        </form>
+
+        <div id="confirmationMessage"></div>
+        <a href="#top">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 12h-2v2H9v-2H7l5-5 5 5z"
+            />
+          </svg>
+        </a>
+      </footer>
+      <main>
+        <h2>Uni</h2>
+      </main>
+    </div>
+    <script src="/static/resource/JavaScript/submittext.js"></script>
+
+    <script src="/static/resource/JavaScript/mimo84-bootstrap-maxlength-335860e/src/bootstrap-maxlength.js"></script>
+    <script>
+      $("textarea").maxlength({
+        alwaysShow: true,
+        threshold: 10,
+        warningClass: "label label-info",
+        limitReachedClass: "label label-warning",
+        placement: "top",
+        preText: "used ",
+        separator: " of ",
+        postText: " chars.",
+      });
+
+      $(function () {
+        $(document).tooltip();
+      });
+
+      $(function () {
+        $("#draggable").draggable();
+      });
+    </script>
+  </body>
+</html>

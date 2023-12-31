@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moje Zainteresowania</title>
+    <link rel="stylesheet" type="text/css" href="./static/style/style.css" />
+    <link rel="icon" type="image/x-icon" href="./static/resource/svg/Ficon.svg" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <?php
+    include './static/partial/top.phtml';
+    ?>
+      <main>
+        <div class="main">
+          <p>Koty</p>
+        </div>
+      </main>
+      <div class="content">
+        
+          Z początku debiutu platformy TikTok, nie byłem przekonany co do jej
+          polityki prywatności i przetwarzania danych osobowych. Jednakże, po
+          dłuższym czasie zdecydowałem się na założenie konta, by móc przeglądać
+          treści, które mnie interesują. Mimo tego, że większość życia byłem
+          osobą preferującą psy, a na dodatek posiadającą alergię na koty, stały
+          się one jednym z moich główych zainteresowań. Poniżej znajduje się
+          lista zawierająca trzy konta poświęcone moim faworytom.
+        
+        <div class="catlistcontainer">
+          <ul id="catlist">
+            <li>
+              <a href="./cats/uni.html">Uni</a>
+            </li>
+            <li>
+              <a href="./cats/panko.html">Panko</a>
+            </li>
+            <li>
+              <a href="./cats/melonandfin.html">Melon i Fin</a>
+            </li>
+          </ul>
+          <br />
+          Każdy z tych kotów jest na swój sposób wyjątkowy, oraz posiada charakter będący wręcz kompletnym przeciwieństwem pozostałych kotów z listy. Jednakże, każdy z nich jest równie uroczy i zasługuje na uwagę.
+        </div>
+      </div>
+    </div>
+    <script src="./static/resource/JavaScript/submittext.js"></script>
+
+    <script src="./static/resource/JavaScript/mimo84-bootstrap-maxlength-335860e/src/bootstrap-maxlength.js"></script>
+    <script>
+      $("textarea").maxlength({
+        alwaysShow: true,
+        threshold: 10,
+        warningClass: "label label-info",
+        limitReachedClass: "label label-warning",
+        placement: "top",
+        preText: "used ",
+        separator: " of ",
+        postText: " chars.",
+      });
+
+      $(function () {
+        $(document).tooltip();
+      });
+
+      $(function () {
+        $("#draggable").draggable();
+      });
+    </script>
+  </body>
+</html>

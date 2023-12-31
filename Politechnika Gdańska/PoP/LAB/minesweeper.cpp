@@ -2,7 +2,7 @@
 using namespace std;
 
 #define SIZE 10
-
+//dodane lll
 void Change(char arr[][SIZE], int col, int row, char *location) {
     int count = 0;
     for(int i=-1; i < 2; i++) {
